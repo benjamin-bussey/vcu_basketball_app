@@ -33,7 +33,7 @@ class About extends StatelessWidget {
               color: Color(0xFFFFB300),
               onPressed: () async {
                 //TODO Fill in github link to project
-                var url = '';
+                var url = 'https://github.com/theBusBoy/vcu_basketball_app';
                 if (await canLaunch(url)) {
                   await launch(url);
                 } else {

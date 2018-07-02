@@ -5,12 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Roster extends StatefulWidget {
+class Coaches extends StatefulWidget {
   @override
-  _RosterState createState() => _RosterState();
+  _CoachesState createState() => _CoachesState();
 }
 
-class _RosterState extends State<Roster> {
+class _CoachesState extends State<Coaches> {
   List _data;
   static const String BASE_URL = 'http://www.vcuathletics.com';
 
@@ -40,16 +40,11 @@ class _RosterState extends State<Roster> {
               Column(
                 children: <Widget>[
                   Text(_data[index]['name'], style: TextStyle(fontSize: 22.0),),
-                  Text(_data[index]['number']),
-                  Text(_data[index]['position']),
-                  Text(_data[index]['height']),
-                  Text(_data[index]['weight']),
-                  Text(_data[index]['prevSchool']),
                   RaisedButton(onPressed: () => _openBio(_data[index]['bio']))
                 ],
               ),
               Expanded(
-                  //Building image from base url + json data
+                //Building image from base url + json data
                   child: Image.network('${BASE_URL + _data[index]['picture']}')),
             ],
           ),

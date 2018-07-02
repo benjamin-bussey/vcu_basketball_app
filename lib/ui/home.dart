@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../ui/about.dart';
+import '../ui/roster.dart';
+import '../ui/coaches.dart';
+import '../ui/news.dart';
 
 class Home extends StatefulWidget {
   @override
