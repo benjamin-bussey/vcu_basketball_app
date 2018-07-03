@@ -25,7 +25,7 @@ class _RosterState extends State<Roster> {
   Widget build(BuildContext context) {
     double viewWidth = MediaQuery.of(context).size.width;
     double viewHeight = MediaQuery.of(context).size.height;
-    return Center(
+    return Container(
       child: ListView.builder(
         itemCount: _data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -51,7 +51,7 @@ class _RosterState extends State<Roster> {
                         children: <Widget>[
                           Text(
                             _data[index]['name'],
-                            style: TextStyle(fontSize: 16.5),
+                            style: TextStyle(fontSize: 18.0),
                           ),
                           Text(' #${_data[index]['number']}'),
                           Text(' ${_data[index]['position']}'),
@@ -62,12 +62,16 @@ class _RosterState extends State<Roster> {
                       color: Colors.black,
                     ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Expanded(
-                          // Building player data column in the box
+                            // Building player data column in the box
+                            child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 10.0, bottom: 5.0, right: 5.0),
                           child: Column(
                             children: <Widget>[
-                              Text('Year: ${_data[index]['year']}'),
+                              Text('Year: ${_data[index]['year']}', style: TextStyle(fontSize: 17.0),),
                               Row(
                                 children: <Widget>[
                                   Text('HT: ${_data[index]['height']}'),
@@ -76,13 +80,14 @@ class _RosterState extends State<Roster> {
                               ),
                               Text(
                                 _data[index]['prevSchool'],
-                                style: TextStyle(fontSize: 11.0),
+                                style: TextStyle(fontSize: 13.0),
                               ),
                             ],
+                            crossAxisAlignment: CrossAxisAlignment.start,
                           ),
-                        ),
+                        )),
                         Padding(
-                          padding: EdgeInsets.only(right: 5.0, bottom: 5.0),
+                          padding: EdgeInsets.only(right: 10.0, bottom: 10.0),
                           child: Image.network(
                             '${BASE_URL + _data[index]['picture']}',
                           ),
@@ -97,7 +102,6 @@ class _RosterState extends State<Roster> {
     );
   }
 
-  //TODO Write method to open player bio
   _openBio(String bio) async {
     //Create url to be launched
     var url = '${BASE_URL + bio}';

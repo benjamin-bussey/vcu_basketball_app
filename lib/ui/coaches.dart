@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class Coaches extends StatefulWidget {
   List coachData;
-  Coaches(coachData){
+
+  Coaches(coachData) {
     this.coachData = coachData;
   }
 
@@ -16,7 +17,7 @@ class _CoachesState extends State<Coaches> {
   List _data;
   static const String BASE_URL = 'http://www.vcuathletics.com';
 
-  _CoachesState(List coachData){
+  _CoachesState(List coachData) {
     _data = coachData;
   }
 
@@ -28,33 +29,40 @@ class _CoachesState extends State<Coaches> {
       itemCount: _data.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          decoration: BoxDecoration(
-            color: Color(0xFFFFB300),
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          margin: EdgeInsets.fromLTRB(viewWidth * .05, viewHeight * .015,
-              viewWidth * .05, viewHeight * .015),
-          child: Row(
-            children: <Widget>[
-              // Building player data column in the box
-              Column(
+            decoration: BoxDecoration(
+              color: Color(0xFFFFB300),
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            margin: EdgeInsets.fromLTRB(viewWidth * .05, viewHeight * .015,
+                viewWidth * .05, viewHeight * .015),
+            child: GestureDetector(
+              onTap: () => _openBio(_data[index]['bio']),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(_data[index]['name'], style: TextStyle(fontSize: 22.0),),
-                  RaisedButton(onPressed: () => _openBio(_data[index]['bio']), child: Text('View Bio'),)
+                  // Building coach data column in the box
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.only(left: 10.0, top: 10.0),
+                    child: Text(
+                      _data[index]['name'],
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                  )),
+                  Padding(
+                      //Building image from base url + json data
+                      padding:
+                          EdgeInsets.only(top: 10.0, right: 5.0, bottom: 10.0),
+                      child: Image
+                          .network('${BASE_URL + _data[index]['picture']}')),
                 ],
               ),
-              Expanded(
-                //Building image from base url + json data
-                  child: Image.network('${BASE_URL + _data[index]['picture']}')),
-            ],
-          ),
-        );
+            ));
       },
     );
   }
 
-  //TODO Write method to open player bio
-  _openBio(String bio) async{
+  _openBio(String bio) async {
     //Create url to be launched
     var url = '${BASE_URL + bio}';
 

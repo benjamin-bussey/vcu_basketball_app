@@ -55,6 +55,7 @@ class _NewsState extends State<News> {
                   width: 200.0,
                   alignment: Alignment.center,
                 ),
+                Divider(color: Colors.black,),
                 Padding(
                   padding: EdgeInsets.all(7.5),
                   child: Column(
@@ -78,7 +79,6 @@ class _NewsState extends State<News> {
     );
   }
 
-  //TODO Write method to open player bio
   _openURL(String link) async {
     //Create url to be launched
     var url = '${BASE_URL + link}';
