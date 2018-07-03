@@ -12,6 +12,7 @@ class About extends StatelessWidget {
             style: TextStyle(fontSize: 30.0),
           ),
         ),
+        Divider(),
         Text(
             'The unofficial VCU Basketball app was created by Benjamin Bussey. '
             'This app has no affiliation to VCU or the Men\'s basketball team.'),

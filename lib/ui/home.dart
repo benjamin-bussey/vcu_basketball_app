@@ -5,8 +5,15 @@ import '../ui/coaches.dart';
 import '../ui/news.dart';
 
 class Home extends StatefulWidget {
+  List newsData, coachData, playerData;
+  Home(List newsData, List coachData, List playerData){
+    this.newsData = newsData;
+    this.coachData = coachData;
+    this.playerData = playerData;
+  }
+
   @override
-  _HomeState createState() => _HomeState();
+  _HomeState createState() => _HomeState(newsData, coachData, playerData);
 }
 
 class _HomeState extends State<Home> {
@@ -18,26 +25,24 @@ class _HomeState extends State<Home> {
   List<Widget> pages;
   Widget currentPage;
 
-  @override
-  void initState() {
+  _HomeState(newsData, coachData, playerData){
     about = About();
-    roster = Roster();
-    coaches = Coaches();
-    news = News();
+    roster = Roster(playerData);
+    coaches = Coaches(coachData);
+    news = News(newsData);
 
     pages = [news, roster, coaches, about];
-    currentPage = about;
-
-    super.initState();
+    currentPage = news;
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('VCU Basketball'),
+        title: Text('VCU Basketball', style: TextStyle(color: Color(0xFFFFB300)),),
         centerTitle: true,
-        backgroundColor: Color(0xFFFFB300),
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -54,15 +59,42 @@ class _HomeState extends State<Home> {
           },
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text('Home')),
+              icon: Icon(
+                Icons.library_books,
+                color: Colors.black,
+              ),
+              title: Text(
+                'News',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.people), title: Text('Roster')),
+                icon: Icon(
+                  Icons.people,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Roster',
+                  style: TextStyle(color: Colors.black),
+                )),
             BottomNavigationBarItem(
-                icon: Icon(Icons.face), title: Text('Coaches')),
+                icon: Icon(
+                  Icons.face,
+                  color: Colors.black,
+                ),
+                title: Text(
+                  'Coaches',
+                  style: TextStyle(color: Colors.black),
+                )),
             BottomNavigationBarItem(
-              icon: Icon(Icons.library_books),
-              title: Text('News'),
-            )
+              icon: Icon(
+                Icons.info_outline,
+                color: Colors.black,
+              ),
+              title: Text(
+                'About',
+                style: TextStyle(color: Colors.black),
+              ),),
           ]),
     );
   }

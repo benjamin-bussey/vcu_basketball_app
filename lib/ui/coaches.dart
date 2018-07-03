@@ -1,23 +1,23 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class Coaches extends StatefulWidget {
+  List coachData;
+  Coaches(coachData){
+    this.coachData = coachData;
+  }
+
   @override
-  _CoachesState createState() => _CoachesState();
+  _CoachesState createState() => _CoachesState(coachData);
 }
 
 class _CoachesState extends State<Coaches> {
   List _data;
   static const String BASE_URL = 'http://www.vcuathletics.com';
 
-  @override
-  void initState() async {
-    _data = await _getData();
-    super.initState();
+  _CoachesState(List coachData){
+    _data = coachData;
   }
 
   @override
@@ -29,7 +29,7 @@ class _CoachesState extends State<Coaches> {
       itemBuilder: (BuildContext context, int index) {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.amber,
+            color: Color(0xFFFFB300),
             borderRadius: BorderRadius.circular(5.0),
           ),
           margin: EdgeInsets.fromLTRB(viewWidth * .05, viewHeight * .015,
@@ -40,7 +40,7 @@ class _CoachesState extends State<Coaches> {
               Column(
                 children: <Widget>[
                   Text(_data[index]['name'], style: TextStyle(fontSize: 22.0),),
-                  RaisedButton(onPressed: () => _openBio(_data[index]['bio']))
+                  RaisedButton(onPressed: () => _openBio(_data[index]['bio']), child: Text('View Bio'),)
                 ],
               ),
               Expanded(
@@ -64,11 +64,4 @@ class _CoachesState extends State<Coaches> {
       throw 'Could not open webpage';
     }
   }
-}
-
-Future<List> _getData() async {
-  String url = '';
-
-  http.Response response = await http.get(url);
-  return json.decode(response.body);
 }
